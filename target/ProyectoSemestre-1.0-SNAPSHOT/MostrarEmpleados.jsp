@@ -1,44 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
+<%@ page import="java.util.List" %>
+<%@ page import="com.gestionEmpresa.model.Empleado" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Mostrar Empleados</title>
+    <title>Mostrar Empleado</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 
 <h2>Lista de Empleados</h2>
 
-<c:choose>
-    <c:when test="${not empty requestScope.Empleado}">
-        <table border="1">
-            <tr>
-                <th>RUT</th>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Teléfono</th>
-                <th>Rol</th>
-                <th>Estado</th>
-                <th>Salario</th>
-            </tr>
-            <c:forEach var="empleado" items="${requestScope.Empleado}">
-                <tr>
-                    <td>${empleado.rut}</td>
-                    <td>${empleado.nombre}</td>
-                    <td>${empleado.apellido}</td>
-                    <td>${empleado.telefono}</td>
-                    <td>${empleado.rol}</td>
-                    <td>${empleado.estado}</td>
-                    <td>${empleado.salario}</td>
-                </tr>
-            </c:forEach>
-        </table>
-    </c:when>
-    <c:otherwise>
-        <p>No hay empleados para mostrar.</p>
-    </c:otherwise>
-</c:choose>
+<%
+    List<Empleado> empleados = (List<Empleado>) request.getAttribute("empleados");
+%>
+
+<% if (empleados != null && !empleados.isEmpty()) { %>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>Rut</th>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Teléfono</th>
+        <th>Rol</th>
+        <th>Estado</th>
+        <th>Salario</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for (Empleado empleado : empleados) { %>
+    <tr>
+        <td><%= empleado.getRut() %></td>
+        <td><%= empleado.getNombre() %></td>
+        <td><%= empleado.getApellido() %></td>
+        <td><%= empleado.getTelefono() %></td>
+        <td><%= empleado.getRol() %></td>
+        <td><%= empleado.getEstado() %></td>
+        <td><%= empleado.getSalario() %></td>
+    </tr>
+    <% } %>
+    </tbody>
+</table>
+
+<% } else { %>
+
+<p>No hay empleados para mostrar.</p>
+
+<% } %>
 
 </body>
 </html>

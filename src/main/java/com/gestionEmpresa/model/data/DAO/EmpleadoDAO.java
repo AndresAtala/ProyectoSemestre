@@ -1,9 +1,15 @@
 package com.gestionEmpresa.model.data.DAO;
 
 import com.gestionEmpresa.model.Empleado;
+import com.gestionEmpresa.model.data.DBConnector;
 import org.jooq.DSLContext;
+import org.jooq.Result;
+import org.jooq.impl.DSL;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import java.sql.Connection;
 
 import static org.jooq.impl.DSL.field;
 import static org.jooq.impl.DSL.table;
@@ -44,22 +50,22 @@ public class EmpleadoDAO {
         return filasActualizadas > 0;
     }
 
-    public List<Empleado> obtenerTodosEmpleados() {
-        try {
-            List<Empleado> empleados = create.selectFrom(table("Empleado"))
-                    .fetchInto(Empleado.class);
+    public static List<Empleado> obtenerListaEmpleados(DSLContext create) {
+        Result resultados = create.select().from(table("Empleado")).fetch();
+        List<Empleado> empleados = new ArrayList<>();
 
-            System.out.println("Número de empleados encontrados: " + empleados.size());
+        for (int fila = 0; fila < resultados.size(); fila++) {
+            String rut = (String) resultados.getValue(fila, "rut");
+            String nombre = (String) resultados.getValue(fila, "nombre");
+            String apellido = (String) resultados.getValue(fila, "apellido");
+            int telefono = (Integer) resultados.getValue(fila, "telefono");
+            String rol = (String) resultados.getValue(fila, "rol");
+            String estado = (String) resultados.getValue(fila, "estado");
+            int salario = (Integer) resultados.getValue(fila, "salario");
 
-            // Imprimir los empleados para depuración
-            for (Empleado empleado : empleados) {
-                System.out.println(empleado);
-            }
-
-            return empleados;
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("Error al obtener todos los empleados", e);
+            empleados.add(new Empleado(rut, nombre, apellido, telefono, rol, estado, salario));
         }
+
+        return empleados;
     }
 }

@@ -8,8 +8,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Producto Agregado Correctamente</title>
-    <h1>Producto AGregado</h1>
+    <meta charset="UTF-8">
+    <title>Producto Agregado</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
 <li><a href="index.jsp">INICIO</a></li>

@@ -24,9 +24,15 @@ public class ConstruccionDAO {
     public boolean modificarPresupuesto(String tipoConstruccion, double nuevoPresupuesto) {
         return create.update(table("Construccion"))
                 .set(field("presupuesto"), nuevoPresupuesto)
-                .where(field("construccion").eq(tipoConstruccion))
+                .where(field("tipoConstruccion").eq(tipoConstruccion))  // Corregir el nombre de la columna en la cláusula WHERE
                 .execute() > 0;
     }
+    public boolean eliminarConstruccion(String tipoConstruccion) {
+        return create.deleteFrom(table("Construccion"))
+                .where(field("tipoConstruccion").eq(tipoConstruccion))
+                .execute() > 0;
+    }
+
 }
 
 

@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar Producto</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
+
 <body>
 
 <h1>Agregar Producto</h1>

@@ -3,6 +3,7 @@ package com.gestionEmpresa.controller;
 import com.gestionEmpresa.model.Construccion;
 import com.gestionEmpresa.model.data.DAO.ConstruccionDAO;
 import com.gestionEmpresa.model.data.DBGenerator;
+import org.jooq.DSLContext;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -13,7 +14,6 @@ import java.io.IOException;
 
 @WebServlet(name = "agregarConstruccionServlet", value = "/AgregarConstruccionServlet")
 public class AgregarConstruccionServlet extends HttpServlet {
-
     public void init() throws ServletException {
         try {
             DBGenerator.iniciarBD("Proyecto");
@@ -32,10 +32,11 @@ public class AgregarConstruccionServlet extends HttpServlet {
 
             Construccion construccion = new Construccion(tipoConstruccion, construccionesAdicionales, cantidadProductos, presupuesto);
 
-            ConstruccionDAO construccionDAO = new ConstruccionDAO(DBGenerator.conectarBD("Proyecto"));
+            DSLContext query = DBGenerator.conectarBD("Proyecto");
+            ConstruccionDAO construccionDAO = new ConstruccionDAO(query);
             construccionDAO.agregarConstruccion(construccion);
-
             resp.sendRedirect("ConstruccionAgregada.jsp");
+
         } catch (NumberFormatException e) {
             e.printStackTrace();
             resp.sendRedirect("Error.jsp");

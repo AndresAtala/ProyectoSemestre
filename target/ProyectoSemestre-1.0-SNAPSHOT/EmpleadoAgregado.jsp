@@ -8,10 +8,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Agregado Correctamente</title>
-    <li><a href="index.jsp">INICIO</a></li>
+    <meta charset="UTF-8">
+    <title>Empleado Agregado</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-
+<li><a href="index.jsp">INICIO</a></li>
 </body>
 </html>

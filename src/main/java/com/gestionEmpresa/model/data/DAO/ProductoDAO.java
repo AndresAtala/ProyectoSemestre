@@ -40,22 +40,18 @@ public class ProductoDAO {
             throw new RuntimeException("Error al obtener todos los productos", e);
         }
     }
-    public List<String> obtenerNombresProductos() {
+    public boolean modificarPrecio(String nombreProducto, double nuevoPrecio) {
         try {
-            List<String> nombresProductos = create.select(field("nombre"))
-                    .from(table("Producto"))
-                    .fetchInto(String.class);
+            int filasActualizadas = create.update(table("Producto"))
+                    .set(field("precio"), nuevoPrecio)
+                    .where(field("nombre").eq(nombreProducto))
+                    .execute();
 
-            System.out.println("Número de productos encontrados: " + nombresProductos.size());
-
-            for (String nombreProducto : nombresProductos) {
-                System.out.println(nombreProducto);
-            }
-
-            return nombresProductos;
+            return filasActualizadas > 0;
         } catch (Exception e) {
             e.printStackTrace();
-            throw new RuntimeException("Error al obtener los nombres de productos", e);
+            throw new RuntimeException("Error al modificar el precio del producto", e);
         }
     }
+
 }

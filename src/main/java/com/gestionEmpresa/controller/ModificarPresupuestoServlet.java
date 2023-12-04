@@ -11,7 +11,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("ModificarPresupuestoServlet")
+@WebServlet(name = "ModificarPresupuestoServlet", value = "/ModificarPresupuestoServlet")
 public class ModificarPresupuestoServlet extends HttpServlet {
     public void init() throws ServletException {
         try {

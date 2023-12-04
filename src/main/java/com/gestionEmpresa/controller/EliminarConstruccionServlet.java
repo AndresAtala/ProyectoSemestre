@@ -1,7 +1,7 @@
 package com.gestionEmpresa.controller;
 
 import com.gestionEmpresa.model.data.DBGenerator;
-import com.gestionEmpresa.model.data.DAO.EmpleadoDAO;
+import com.gestionEmpresa.model.data.DAO.ConstruccionDAO;
 import org.jooq.DSLContext;
 
 import jakarta.servlet.ServletException;
@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/EliminarEmpleadoServlet")
-public class EliminarEmpleadoServlet extends HttpServlet {
+@WebServlet("/EliminarConstruccionServlet")
+public class EliminarConstruccionServlet extends HttpServlet {
     public void init() throws ServletException {
         try {
             DBGenerator.iniciarBD("Proyecto");
@@ -29,21 +29,21 @@ public class EliminarEmpleadoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Obtener parámetros del formulario
-        String rut = request.getParameter("rut");
+        String tipoConstruccion = request.getParameter("tipoConstruccion");
 
         try {
             // Conectar a la base de datos
             DSLContext query = DBGenerator.conectarBD("Proyecto");
 
-            // Crear una instancia del DAO para Empleado
-            EmpleadoDAO empleadoDAO = new EmpleadoDAO(query);
+            // Crear una instancia del DAO para Construccion
+            ConstruccionDAO construccionDAO = new ConstruccionDAO(query);
 
-            // Lógica para eliminar el empleado por su rut
-            boolean eliminacionExitosa = empleadoDAO.borrarEmpleado(rut);
+            // Lógica para eliminar la construcción por su tipo
+            boolean eliminacionExitosa = construccionDAO.eliminarConstruccion(tipoConstruccion);
 
             // Redireccionar a una página de éxito o mostrar un mensaje
             if (eliminacionExitosa) {
-                response.sendRedirect("EmpleadoEliminado.jsp");
+                response.sendRedirect("index.jsp");
             } else {
                 // Puedes redirigir a una página de error personalizada si la eliminación falla
                 response.sendRedirect("Error.jsp");

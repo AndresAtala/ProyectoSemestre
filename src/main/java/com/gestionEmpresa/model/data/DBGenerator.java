@@ -57,8 +57,6 @@ public class DBGenerator {
                 .column("rol", VARCHAR(50))
                 .column("estado", VARCHAR(50))
                 .column("salario", INTEGER)
-                .column("horaEntrada", TIME)
-                .column("horaSalida", TIME)
                 .constraint(primaryKey("rut"))
                 .execute();
 

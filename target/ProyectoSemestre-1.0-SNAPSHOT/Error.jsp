@@ -1,16 +1,13 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: andre
-  Date: 03-12-2023
-  Time: 1:20
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Error vuelva a inicio</title>
+    <meta charset="UTF-8">
+    <title>Error</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-<li><a href="index.jsp">INICIO</a></li>
+<h2>Error en la Operación</h2>
+<p>Ha ocurrido un error durante la operación. Por favor, intenta nuevamente.</p>
+<p><a href="index.jsp">Volver a la página principal</a></p>
 </body>
 </html>
